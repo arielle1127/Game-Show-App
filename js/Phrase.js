@@ -20,15 +20,15 @@ class Phrase {
          let li = document.createElement('li');
          ul.appendChild(li);
 
-         if (character === ' ') {                       //if character is a space, add classList= space
-            li.classList.add = 'space'; 
+         if (character === ' ') {   
+            li.classList.add('space');               //if character is a space, add classList= space
+             
         } else { 
-            li.classList.add = 'hide letter';          //if character is a letter, hide letter
+            li.classList.add('hide');                 //if character is a letter, hide letter
+            li.classList.add('letter');
         }
     });                  
-}
-
-
+  }
 }
 
 
