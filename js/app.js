@@ -5,6 +5,15 @@
 //app.js created to create a new instance of the `Game` class and add event listeners for the start button and onscreen keyboard buttons.
 
 
-const game = new Game();
-game.getRandomPhrase().addPhraseToDisplay();
-console.log(ul);
+
+let game;                           //empty game variable
+
+document.getElementById('btn__reset').addEventListener('click', () => {   //eventListener triggered by click on btn__reset
+    game = new Game();             //instantiates new game object
+    game.startGame();              //calls startGame method on new game object- which will display the game board
+});
+
+
+
+
+

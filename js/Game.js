@@ -8,7 +8,7 @@ class Game {
     constructor() {
         this.missed = 0;     //keeps track of missed guesses
         this.phrases = this.createPhrases();   //holds an array of phrases that  was  created with the createPhrases method
-        this.activePhrase = null;   //this is the phrase object currently in play. initial setting is null
+        this.activePhrase = this.getRandomPhrase();   //this is the phrase object currently in play. initial setting is null
     }
 
 /**
@@ -24,7 +24,7 @@ class Game {
                         ];
         return phrases;
     }
-    
+
 /**
 * Selects random phrase from phrases property
 * @return {Object} Phrase object chosen to be used
@@ -36,6 +36,16 @@ class Game {
         };
 
 
+/**
+* Begins game by selecting a random phrase and displaying it to user
+*/
+    startGame() {
+        let hideOverlay = document.getElementById('overlay').style.display = 'none';  //hides the overlay
+        this.getRandomPhrase();                                  //gets + stores random phrase
+        this.activePhrase.addPhraseToDisplay();              //adds hidden  phrase (gray boxes, spaces)
+    }
 }
+
+
 
 
