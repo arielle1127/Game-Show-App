@@ -17,3 +17,10 @@ document.getElementById('btn__reset').addEventListener('click', () => {   //even
 
 
 
+let keyboard = document.getElementById('qwerty'); //Disable the selected letter’s onscreen keyboard button.
+
+keyboard.addEventListener('click', (e) => {
+   game.handleInteraction(e.target);
+}); 
+
+

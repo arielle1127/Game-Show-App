@@ -44,6 +44,108 @@ class Game {
         this.getRandomPhrase();                                  //gets + stores random phrase
         this.activePhrase.addPhraseToDisplay();              //adds hidden  phrase (gray boxes, spaces)
     }
+
+/**
+* Displays game over message
+* @param {boolean} gameWon - Whether or not the user won the game
+*/
+
+gameOver(gameWon) {                                         //how does this method know what gameWon means?
+    let overlay = document.getElementById('overlay');
+    let gameOverMessage = document.getElementById("game-over-message");
+    overlay.style.display = 'block';
+   
+    if(gameWon) {
+        gameOverMessage.textContent = 'Wow, you won!';
+        overlay.classList = 'win';
+    } else {   
+        gameOverMessage.textContent = 'Sorry, you suck at this game!';
+        overlay.classList = 'lose';
+    }
+};
+
+
+
+
+ 
+/**
+* Increases the value of the missed property
+* Removes a life from the scoreboard
+* Checks if player has remaining lives and ends game if player is out
+*/
+removeLife() {
+    this.missed += 1;
+    const tries = document.querySelector('.tries');
+    const heart = tries.firstChild;
+    tries.classList.remove('tries');
+    heart.src = 'images/lostHeart.png';
+    
+    if(this.missed === 5) {
+        this.gameOver(false);
+    }
+}
+
+
+
+/**
+* Checks for winning move
+* @return {boolean} True if game has been won, false if game wasn't
+won
+*/
+
+// How to win? Guess all the letters correctly
+// if all li elements are changed from hidden to display, then you get a check for win
+
+checkForWin() {
+    const hiddenLetters = document.getElementsByClassName('hide');
+    if(hiddenLetters.length === 0 && this.missed < 5) {    
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+* Checks if the onscreen keyboard button clicked by the player matches a letter in the phrase
+* then directs the game based on a correct or incorrect guess. 
+*/
+
+
+/**
+* Handles onscreen keyboard button clicks
+* @param (HTMLButtonElement) button - The clicked button element
+*/
+
+handleInteraction(button) {
+    button.disabled = true;
+    const checkLetter = this.activePhrase.checkLetter(button.textContent);
+   
+    if (checkLetter) {
+       button.classList.add('chosen');
+       this.activePhrase.showMatchedLetter(button.textContent);
+        this.checkForWin();
+    }
+    
+    if (this.checkForWin()) {
+        this.gameOver(true);
+    } 
+    
+    else {
+       button.classList.add('wrong');
+       this.removeLife();
+    }
+}
+
+
+
+
+
+// resetGame(){
+
+// }
+
+
+
 }
 
 
