@@ -64,7 +64,7 @@ class Game {
     gameOver(gameWon) {                                        
         let overlay = document.getElementById('overlay');
         let gameOverMessage = document.getElementById("game-over-message");
-        overlay.style.display = 'block';
+        overlay.style.display = 'flex';
         this.resetGame();
     
         if(gameWon) {
