@@ -43,6 +43,7 @@ class Game {
         let hideOverlay = document.getElementById('overlay').style.display = 'none';  //hides the overlay
         this.getRandomPhrase();                                  //gets + stores random phrase
         this.activePhrase.addPhraseToDisplay();              //adds hidden  phrase (gray boxes, spaces)
+      this.missed = 0;
     }
 
 /**
@@ -54,6 +55,7 @@ gameOver(gameWon) {                                         //how does this meth
     let overlay = document.getElementById('overlay');
     let gameOverMessage = document.getElementById("game-over-message");
     overlay.style.display = 'block';
+    this.resetGame();
    
     if(gameWon) {
         gameOverMessage.textContent = 'Wow, you won!';
@@ -123,28 +125,47 @@ handleInteraction(button) {
     if (checkLetter) {
        button.classList.add('chosen');
        this.activePhrase.showMatchedLetter(button.textContent);
-        this.checkForWin();
-    }
-    
-    if (this.checkForWin()) {
-        this.gameOver(true);
+       this.checkForWin();
     } 
     
     else {
-       button.classList.add('wrong');
-       this.removeLife();
-    }
+        button.classList.add('wrong');
+        this.removeLife();
+     }
+
+    if (this.checkForWin()) {
+        this.gameOver(true);
+    } 
 }
 
 
 
+resetGame() {
+    let ul = document.getElementById('phrase').firstElementChild;
+    ul.innerHTML = '';
+ 
+
+    let keys = document.getElementsByClassName('key'); 
+
+    for (let i = 0; i < keys.length; i++) {
+    keys[i].classList.remove('wrong'); 
+    keys[i].classList.remove('chosen');     
+    keys[i].disabled = false;
+    }
+
+    const hearts = document.querySelectorAll('#scoreboard li');
+    for(let i= 0; i < hearts.length; i++) {
+            hearts[i].className = 'tries';
+            hearts[i].firstElementChild.src = 'images/liveHeart.png';
+        }
+    }
+
+   
 
 
-// resetGame(){
-
-// }
-
-
+    
+  
+   
 
 }
 
