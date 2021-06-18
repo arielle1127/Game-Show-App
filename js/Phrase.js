@@ -15,27 +15,26 @@ class Phrase {
 /**
 * Display phrase on game board
 */
-   addPhraseToDisplay() {
-     
-     let ul = document.getElementById('phrase').firstElementChild;   
-     let splitPhrase = this.phrase.split('');        
+addPhraseToDisplay() {
+    
+    let ul = document.getElementById('phrase').firstElementChild;   
+    let splitPhrase = this.phrase.split('');        
 
-    splitPhrase.forEach(character => {                 
-         let li = document.createElement('li');
-         ul.appendChild(li);
-         li.innerHTML = `${character}`;
-         
-
-         if (character === ' ') {   
-            li.classList.add('space');               
-             
-        } else { 
-            li.classList.add('hide');                 
-            li.classList.add('letter');
-            li.classList.add(character);
-        }
-     })                  
-   }
+splitPhrase.forEach(character => {                 
+        let li = document.createElement('li');
+        ul.appendChild(li);
+        li.innerHTML = `${character}`;
+        
+        if (character === ' ') {   
+        li.classList.add('space');               
+            
+    } else { 
+        li.classList.add('hide');                 
+        li.classList.add('letter');
+        li.classList.add(character);
+    }
+    })                  
+}
 
 /**
 * Checks if passed letter is in phrase
