@@ -14,7 +14,7 @@ class Game {
     constructor() {
         this.missed = 0;     
         this.phrases = this.createPhrases();   
-        this.activePhrase = this.getRandomPhrase();   
+        this.activePhrase = null;   
     }
 
 /**
@@ -51,8 +51,8 @@ class Game {
     * 
 */
     startGame() {
-        let hideOverlay = document.getElementById('overlay').style.display = 'none';  
-        this.getRandomPhrase();                                 
+        let hideOverlay = document.getElementById('overlay').style.display = 'none';                                 
+        this.activePhrase = this.getRandomPhrase();  
         this.activePhrase.addPhraseToDisplay();            
     }
 
@@ -125,17 +125,17 @@ won
         if (checkLetter) {
         button.classList.add('chosen');
         this.activePhrase.showMatchedLetter(button.textContent);
-        this.checkForWin();
-        } 
+        if(this.checkForWin()){
+            this.gameOver(true);
+        }
+    } 
         
         else {
             button.classList.add('wrong');
             this.removeLife();
         }
 
-        if (this.checkForWin()) {
-            this.gameOver(true);
-        } 
+       
     }
 
 
@@ -149,7 +149,6 @@ won
     resetGame() {
         let ul = document.getElementById('phrase').firstElementChild;
         ul.innerHTML = '';
-    
 
         let keys = document.getElementsByClassName('key'); 
 
